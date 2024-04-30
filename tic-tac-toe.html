@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello, World!</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+     <div class="d-flex">
+       <input type="text" onkeyup="run()" class="row_1 col_1 cross_1 w-25" />
+       <input type="text" onkeyup="run()" class="row_1 col_2 w-25" />
+       <input type="text" onkeyup="run()" class="row_1 col_3 cross_2 w-25" />
+     </div>
+     
+      <div class="d-flex mt-1">
+       <input type="text" onkeyup="run()" class="row_2 col_1 w-25" />
+       <input type="text" onkeyup="run()" class="row_2 col_2 cross_1 cross_2 w-25" />
+       <input type="text" onkeyup="run()" class="row_2 col_3  w-25" />
+     </div>
+     
+      <div class="d-flex mt-1">
+       <input type="text" onkeyup="run()" class="row_3 col_1 cross_2 w-25" />
+       <input type="text" onkeyup="run()" class="row_3 col_2 w-25" />
+       <input type="text" onkeyup="run()" class="row_3 col_3 cross_1  w-25" />
+     </div>
+     
+     <script>
+     
+     function reset_fields(){
+       document.querySelectorAll('input').forEach(function(v,index,arr){
+         v.value = '';
+       })
+       
+     }
+     function check_winner(arr){
+       let x = arr.filter((e)=> e=='x');
+       let o = arr.filter((e)=> e=='o');
+       
+       if(x.length == 3){
+         console.log(x);
+         alert('You won the game (x)');
+         reset_fields()
+         return true;
+       }
+       
+       if(o.length == 3){
+         alert('You won the game (o)');
+         reset_fields()
+         return true;
+       }
+     }
+       function run(){
+         var classes = ['row_1','row_2','row_3','col_1','col_2','col_3', 'cross_1','cross_2'];
+         
+         classes.forEach(function(value,index,arr){
+           let all_elem = document.querySelectorAll('.'+value);
+           let check = [];
+           for(let i=0; i<all_elem.length;i++){
+             check.push(all_elem[i].value);
+           }
+           if(check_winner(check)) return;
+         })
+       }
+     </script>
+     
+  </body>
+</html>
